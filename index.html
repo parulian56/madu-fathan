@@ -511,23 +511,86 @@
                 font-size: 12px;
             }
         }
+
+                    /* Tombol hamburger (default hidden) */
+            .menu-toggle {
+                display: none;
+                font-size: 28px;
+                color: #c9862b;
+                cursor: pointer;
+            }
+
+            /* Navbar responsive */
+            @media (max-width: 768px) {
+                .navbar {
+                    flex-wrap: wrap;
+                    padding: 15px 20px;
+                }
+
+                .menu-toggle {
+                    display: block;
+                }
+
+                .navbar nav {
+                    width: 100%;
+                    display: none;
+                    flex-direction: column;
+                    background: #fff8ef;
+                    border-top: 1px solid #eee;
+                    margin-top: 10px;
+                    animation: fadeIn 0.3s ease;
+                }
+
+                .navbar nav.active {
+                    display: flex;
+                }
+
+                .navbar ul {
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+                    padding: 10px 0;
+                }
+
+                .navbar ul li a {
+                    display: block;
+                    padding: 10px 0;
+                    font-size: 16px;
+                    color: #444;
+                    transition: 0.3s;
+                }
+
+                .navbar ul li a:hover {
+                    background: #ffb24a;
+                    color: #fff;
+                    border-radius: 5px;
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+        <!-- Navbar -->
     <header class="navbar">
-        <div class="logo">
-            <img src="image/logo.jpeg" alt="Logo Madu Fathan">
-            <span>Madu Fathan</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#article">Article</a></li>
-                <li><a href="#products">Products</a></li>
-            </ul>
-        </nav>
+    <div class="logo">
+        <img src="image/logo.jpeg" alt="Logo Madu Fathan">
+        <span>Madu Fathan</span>
+    </div>
+
+    <div class="menu-toggle">&#9776;</div>
+
+    <nav>
+        <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#article">Article</a></li>
+        <li><a href="#products">Products</a></li>
+        </ul>
+    </nav>
     </header>
 
     <!-- Banner -->
@@ -702,6 +765,11 @@
         $(".scroll-right").on("click", function() {
             $(".product-slider").animate({ scrollLeft: "+=300" }, 500);
         });
+
+        $(".menu-toggle").on("click", function() {
+        $("nav").toggleClass("active");
+    });
+    
     </script>
 </body>
 </html>
