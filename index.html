@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madu Fathan - Jahe Merah Lemon</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #fff8ef;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: bold;
+            color: #c9862b;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #d87b1d;
+        }
+
+        /* Banner */
+        .banner {
+            margin-top: 80px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* About Section */
+        .about {
+            padding: 70px 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fffefb;
+        }
+
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .about-image img {
+            width: 280px;
+            position: relative;
+            left: -100px;       
+            top: -120px;       
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            color: #d87b1d;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .about-text h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .step {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            flex: 1;
+            transition: 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step img {
+            width: 60px;
+            margin-bottom: 10px;
+        }
+
+        .step h4 {
+            color: #d87b1d;
+            margin-bottom: 10px;
+        }
+
+        /* Article */
+        .article {
+            padding: 60px 8%;
+            background-color: #ffb24a;
+            text-align: center;
+        }
+
+        .article h2 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .article-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 320px;
+            transition: 0.3s;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .card-body h3 {
+            font-size: 18px;
+            color: #c65a0a;
+            margin-bottom: 10px;
+        }
+
+        .card-body p {
+            color: #444;
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .card-body a {
+            color: #d87b1d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Products Slider */
+        .products {
+            background: #fffefb;
+            padding: 60px 8%;
+            text-align: center;
+            position: relative;
+        }
+
+        .products h2 {
+            color: #d87b1d;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .product-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
+        .product-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .product-slider::-webkit-scrollbar-thumb {
+            background: #ffb24a;
+            border-radius: 10px;
+        }
+
+        .product-card {
+            flex: 0 0 auto;
+            width: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.4s;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 55%;
+            transform: translateY(-50%);
+            background: #ffb24a;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .scroll-btn:hover {
+            background: #d87b1d;
+        }
+
+        .scroll-left {
+            left: 5%;
+        }
+
+        .scroll-right {
+            right: 5%;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffff;
+            color: #222;
+            padding: 50px 8% 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+        }
+
+        .footer-section h3 {
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #222;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffb24a;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-icon img {
+            width: 25px;
+            height: 25px;
+            transition: 0.3s;
+        }
+
+        .social-icon:hover img {
+            filter: brightness(1) invert(0);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            background: #ffffff;
+            border-top: 1px solid #444;
+            padding-top: 15px;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .footer-logo span {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d87b1d;
+            letter-spacing: 1px;
+        }
+
+        .footer-section:last-child ul li {
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+
+            .navbar ul {
+                gap: 15px;
+            }
+
+            .about {
+                padding: 50px 6%;
+            }
+
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image img {
+                position: static;
+                margin-bottom: 20px;
+                width: 240px;
+            }
+
+            .about-text h2 {
+                font-size: 26px;
+            }
+
+            .about-text h3 {
+                font-size: 18px;
+            }
+
+            .steps {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .step {
+                flex: 1 1 200px;
+            }
+
+            .article-container {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .product-card {
+                width: 230px;
+            }
+        }
+
+                @media (max-width: 768px) {
+            .about {
+                background-image: url("image/sendok-madu.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center top;
+                padding-top: 160px;
+            }
+
+            .about-image {
+                display: none;
+            }
+
+            .about-text {
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .logo span {
+                font-size: 18px;
+            }
+
+            .about {
+                padding: 40px 5%;
+            }
+
+            .about-text h2 {
+                font-size: 22px;
+            }
+
+            .about-text p {
+                font-size: 14px;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .step {
+                width: 100%;
+            }
+
+            .article h2,
+            .products h2 {
+                font-size: 24px;
+            }
+
+            .card {
+                width: 100%;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section ul li {
+                font-size: 13px;
+            }
+
+            .footer-bottom p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="image/logo.jpeg" alt="Logo Madu Fathan">
+            <span>Madu Fathan</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#article">Article</a></li>
+                <li><a href="#products">Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner" id="home">
+        <img src="image/banner1.png" alt="Madu Fathan Jahe Merah Lemon">
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="image/sendok-madu.png" alt="Sendok Madu">
+            </div>
+            <div class="about-text">
+                <h2>PasAngetnya</h2>
+                <h3>Dari Sarang Lebah sampai ke Rumah Anda</h3>
+                <p>
+                    Madu Fathan adalah madu murni berkualitas tinggi yang dihasilkan langsung dari peternakan lebah alami di pegunungan. 
+                    Kami berkomitmen untuk menghadirkan madu asli tanpa campuran, diproses secara higienis, dan dijaga kemurniannya agar 
+                    setiap tetes mengandung manfaat terbaik dari alam.
+                </p>
+                <div class="steps">
+                    <div class="step">
+                        <img src="image/icon-sarang.png" alt="Sarang Lebah">
+                        <h4>01 Sarang Lebah</h4>
+                        <p>Sarang lebah kami dikelola dan dijaga untuk berada dalam kondisi terbaik.</p>
+                    </div>
+                    <div class="step">
+                        <img src="image/icon-ekstraksi.png" alt="Ekstraksi">
+                        <h4>02 Ekstraksi</h4>
+                        <p>Seluruh madu diekstraksi dan disaring dalam proses yang terjaga.</p>
+                    </div>
+                    <div class="step">
+                        <img src="image/icon-pengemasan.png" alt="Pengemasan">
+                        <h4>03 Pengemasan</h4>
+                        <p>Pengepakan madu kami mengikuti standar keamanan pangan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article -->
+    <section class="article" id="article">
+        <h2>Article</h2>
+        <div class="article-container">
+            <div class="card">
+                <img src="image/article1.png" alt="Artikel 1">
+                <div class="card-body">
+                    <h3>Beli Madurasa di Alfamart dan Alfagift Pasti Berhadiah</h3>
+                    <p>Beli Madurasa di Alfamart dan Alfagift memenangkan hadiah total ratusan juta rupiah.</p>
+                    <a href="#">Selengkapnya →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image/article2.jpeg" alt="Artikel 2">
+                <div class="card-body">
+                    <h3>Beli Madurasa di Alfamart dan Alfagift Pasti Berhadiah</h3>
+                    <p>Beli Madurasa di Alfamart dan Alfagift memenangkan hadiah total ratusan juta rupiah.</p>
+                    <a href="#">Selengkapnya →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image/article1.png" alt="Artikel 3">
+                <div class="card-body">
+                    <h3>Beli Madurasa di Alfamart dan Alfagift Pasti Berhadiah</h3>
+                    <p>Beli Madurasa di Alfamart dan Alfagift memenangkan hadiah total ratusan juta rupiah.</p>
+                    <a href="#">Selengkapnya →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Slider -->
+    <section class="products" id="products">
+        <h2>Product</h2>
+        <button class="scroll-btn scroll-left">‹</button>
+        <div class="product-slider">
+            <div class="product-card"><img src="image/product1.png" alt="Produk 1"></div>
+            <div class="product-card"><img src="image/product2.png" alt="Produk 2"></div>
+            <div class="product-card"><img src="image/product1.png" alt="Produk 3"></div>
+            <div class="product-card"><img src="image/product2.png" alt="Produk 4"></div>
+        </div>
+        <button class="scroll-btn scroll-right">›</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="image/logo.jpeg" alt="Logo Madu Fathan">
+                        <span>Madu Fathan</span>
+                    </div>
+                    <p>Madu murni berkualitas tinggi langsung dari perlebahan kami untuk kesehatan keluarga Indonesia.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><img src="image/fb.png" alt="Facebook"></a>
+                        <a href="#" class="social-icon"><img src="image/ig.png" alt="Instagram"></a>
+                        <a href="#" class="social-icon"><img src="image/twitter.png" alt="Twitter"></a>
+                        <a href="#" class="social-icon"><img src="image/tiktok.png" alt="TikTok"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#">Madu Murni</a></li>
+                    <li><a href="#">Madu Jahe Merah</a></li>
+                    <li><a href="#">Madu Lemon</a></li>
+                    <li><a href="#">Paket Combo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Visi & Misi</a></li>
+                    <li><a href="#">Tim Kami</a></li>
+                    <li><a href="#">Karir</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Article</h3>
+                <ul>
+                    <li><a href="#">Tips Kesehatan</a></li>
+                    <li><a href="#">Manfaat Madu</a></li>
+                    <li><a href="#">Resep</a></li>
+                    <li><a href="#">Berita</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: info@madufathan.com</li>
+                    <li>Phone: +62 812-3456-7890</li>
+                    <li>WhatsApp: +62 812-3456-7890</li>
+                    <li>Alamat: Jakarta, Indonesia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Madu Fathan. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll menu
+        $("nav a").on("click", function(e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const hash = this.hash;
+                $("html, body").animate({
+                    scrollTop: $(hash).offset().top - 70
+                }, 700);
+            }
+        });
+
+        // Efek fade-in saat scroll
+        $(window).on("scroll", function() {
+            $(".card, .step, .product-card").each(function() {
+                const top = $(this).offset().top;
+                const bottom = $(window).scrollTop() + $(window).height();
+                if (bottom > top + 50) $(this).animate({opacity: 1}, 700);
+            });
+        });
+
+        // Scroll kanan kiri jQuery slider
+        $(".scroll-left").on("click", function() {
+            $(".product-slider").animate({ scrollLeft: "-=300" }, 500);
+        });
+        $(".scroll-right").on("click", function() {
+            $(".product-slider").animate({ scrollLeft: "+=300" }, 500);
+        });
+    </script>
+</body>
+</html>
